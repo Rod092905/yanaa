@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ff4fa0">
+<title>Happy 19th Birthday Yana</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial,sans-serif}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ff4fa0,#ffb6e6,#7a5cff,#4fd3ff);
+background-size:400% 400%;
+animation:bg 10s ease infinite;
+overflow:hidden;
+color:#fff;
+}
+
+@keyframes bg{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#ff4fa0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.spinner{
+width:60px;
+height:60px;
+border:6px solid rgba(255,255,255,.3);
+border-top:6px solid #fff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.card{
+width:92%;
+max-width:700px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.2);
+border-radius:24px;
+padding:24px;
+text-align:center;
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+h1{font-size:clamp(2rem,6vw,3.5rem);margin-bottom:10px}
+p{font-size:1rem;line-height:1.6;opacity:.95}
+
+.btn{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary{background:#fff;color:#ff4fa0}
+.secondary{background:rgba(255,255,255,.2);color:#fff}
+
+.hidden{display:none}
+
+.message{
+margin-top:15px;
+padding:15px;
+background:rgba(255,255,255,.15);
+border-radius:16px;
+}
+
+.float{
+position:fixed;
+top:-20px;
+animation:fall linear forwards;
+opacity:.9;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+.container{
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<div class="spinner"></div>
+<p style="margin-top:15px">Preparing Yana's Surprise... 💖</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop preload="auto">
+<source src="bdaysong.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+<div class="card">
+
+<h1>🎂 Happy 19th Birthday Yana 🎉</h1>
+
+<p>
+Today is your 19th birthday Yana, a very special milestone.  
+This day is all about celebrating your beauty, kindness, and the amazing person you are 💖
+</p>
+
+<button class="btn primary" onclick="openGift()">Open Surprise 🎁</button>
+<button class="btn secondary" onclick="playMusic()">Play Music 🎵</button>
+
+<div id="gift" class="hidden message">
+<h2>✨ For Yana ✨</h2>
+<p>
+Yana, you deserve all the happiness this world can give  not just today but always.  
+Keep growing beautifully, keep smiling brightly, and never forget how loved and special you are 🌟
+</p>
+
+<h2>💝 Happy 19th Birthday Yana 💝</h2>
+</div>
+
+</div>
+</div>
+
+<script>
+
+// hide loader
+window.onload=()=>{
+setTimeout(()=>{
+document.getElementById('loader').style.display='none';
+},1200);
+};
+
+// music fix (works better on mobile)
+function playMusic(){
+const music=document.getElementById('music');
+
+music.play().then(()=>{
+console.log("Music playing");
+}).catch(()=>{
+alert("Tap again or interact with screen to enable music 🎵");
+});
+}
+
+// surprise effect
+function openGift(){
+document.getElementById('gift').classList.remove('hidden');
+burst('🎉',40);
+burst('💖',30);
+burst('✨',25);
+}
+
+// floating effects
+function burst(symbol,count){
+for(let i=0;i<count;i++){
+let e=document.createElement('div');
+e.className='float';
+e.innerHTML=symbol;
+e.style.left=Math.random()*100+'vw';
+e.style.fontSize=(16+Math.random()*20)+'px';
+e.style.animationDuration=(3+Math.random()*3)+'s';
+document.body.appendChild(e);
+
+setTimeout(()=>e.remove(),6000);
+}
+}
+
+</script>
+
+</body>
+</html>
